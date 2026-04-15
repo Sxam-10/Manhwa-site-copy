@@ -1,340 +1,76 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Starting With 13 Hidden Traits</title>
-    <style>
-        :root {
-            --bg: #050814;
-            --surface: rgba(15, 23, 42, 0.94);
-            --surface-light: rgba(148, 163, 184, 0.12);
-            --text: #e2e8f0;
-            --muted: #94a3b8;
-            --accent: #38bdf8;
-            --primary: #5b7bff;
-            --primary-strong: #3b5df7;
-            --radius: 24px;
-            --shadow: 0 28px 80px rgba(0, 0, 0, 0.25);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Inter, system-ui, sans-serif;
-            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.12), transparent 30%),
-                        linear-gradient(180deg, #020617 0%, var(--bg) 100%);
-            color: var(--text);
-        }
-
-        body, button, input {
-            font: inherit;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .page {
-            max-width: 1120px;
-            margin: 0 auto;
-            padding: 24px;
-            display: grid;
-            gap: 24px;
-        }
-
-        .page-header {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 18px;
-        }
-
-        .brand {
-            display: flex;
-            gap: 14px;
-            align-items: center;
-        }
-
-        .brand-icon {
-            width: 54px;
-            height: 54px;
-            border-radius: 14px;
-            background: rgba(56, 189, 248, 0.18);
-            display: grid;
-            place-items: center;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .brand-text {
-            display: grid;
-            gap: 4px;
-        }
-
-        .brand-title {
-            font-size: 1rem;
-            font-weight: 700;
-        }
-
-        .brand-subtitle {
-            color: var(--muted);
-            font-size: 0.92rem;
-        }
-
-        .nav-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .nav-link {
-            padding: 10px 16px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text);
-            font-weight: 600;
-            transition: background 0.2s ease;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        .hero-card {
-            background: var(--surface);
-            border: 1px solid var(--surface-light);
-            border-radius: 28px;
-            padding: 32px;
-            box-shadow: var(--shadow);
-            display: grid;
-            gap: 24px;
-        }
-
-        .hero-grid {
-            display: grid;
-            gap: 24px;
-            align-items: start;
-        }
-
-        .hero-grid img {
-            width: 100%;
-            height: auto;
-            border-radius: 24px;
-            object-fit: cover;
-            min-height: 360px;
-        }
-
-        .hero-copy {
-            display: grid;
-            gap: 18px;
-        }
-
-        .eyebrow {
-            text-transform: uppercase;
-            letter-spacing: 0.18em;
-            font-size: 0.78rem;
-            color: var(--accent);
-            margin: 0;
-        }
-
-        .hero-title {
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            margin: 0;
-            line-height: 1.05;
-        }
-
-        .hero-description {
-            font-size: 1rem;
-            color: var(--muted);
-            line-height: 1.8;
-            max-width: 760px;
-        }
-
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 150px;
-            padding: 14px 22px;
-            border: none;
-            border-radius: 999px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: transform 0.2s ease, background 0.2s ease;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-strong);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.14);
-            transform: translateY(-2px);
-        }
-
-        .info-grid {
-            display: grid;
-            gap: 18px;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        }
-
-        .info-card {
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(148, 163, 184, 0.12);
-            border-radius: 22px;
-            padding: 22px;
-        }
-
-        .info-card h2 {
-            font-size: 1rem;
-            margin-bottom: 10px;
-            color: var(--accent);
-        }
-
-        .info-card p {
-            margin: 0;
-            color: var(--muted);
-            line-height: 1.7;
-        }
-
-        .info-card a {
-            color: var(--primary);
-        }
-
-        .description-card {
-            background: var(--surface);
-            border: 1px solid var(--surface-light);
-            border-radius: 28px;
-            padding: 32px;
-            box-shadow: var(--shadow);
-        }
-
-        .description-card h2 {
-            margin-top: 0;
-            font-size: 1.5rem;
-            margin-bottom: 16px;
-        }
-
-        .description-card p {
-            color: var(--muted);
-            line-height: 1.8;
-            font-size: 1rem;
-            margin: 0;
-        }
-
-        footer {
-            text-align: center;
-            color: rgba(226, 232, 240, 0.68);
-            padding-bottom: 8px;
-        }
-
-        @media (min-width: 920px) {
-            .hero-grid {
-                grid-template-columns: 420px 1fr;
-            }
-        }
-
-        @media (max-width: 760px) {
-            .page {
-                padding: 18px;
-            }
-
-            .nav-links {
-                justify-content: center;
-            }
-
-            .hero-grid img {
-                min-height: 280px;
-            }
-        }
-    </style>
+    <meta name="description" content="Series details and synopsis for Starting With 13 Hidden Traits.">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
     <div class="page">
         <header class="page-header">
             <div class="brand">
-                <div class="brand-icon">AS</div>
-                <div class="brand-text">
+                <img src="asura scan.webp" alt="AsuraScan logo">
+                <div>
                     <div class="brand-title">AsuraScan</div>
                     <div class="brand-subtitle">Detailed series page</div>
                 </div>
             </div>
-            <nav class="nav-links">
+            <nav class="nav-links" aria-label="Series navigation">
                 <a class="nav-link" href="manhwa site.html">Home</a>
                 <a class="nav-link active" href="manhwa1.html">Details</a>
                 <a class="nav-link" href="#description">Synopsis</a>
-                <a class="nav-link" href="#">Browse</a>
+                <a class="nav-link" href="https://asurascans.com/comics/starting-with-13-hidden-traits-26f76d6d" target="_blank" rel="noopener noreferrer">Read Chapters</a>
             </nav>
         </header>
 
-        <section class="hero-card">
-            <div class="hero-grid">
-                <img src="https://cdn.asurascans.com/asura-images/covers/starting-with-13-hidden-traits.a5e26c.webp" alt="Starting With 13 Hidden Traits cover">
-                <div class="hero-copy">
-                    <p class="eyebrow">Action · Fantasy · Romance</p>
-                    <h1 class="hero-title">Starting With 13 Hidden Traits</h1>
-                    <p class="hero-description">After being reincarnated into a new world, the protagonist discovers 13 hidden traits that grant tremendous power. He must master those abilities while building alliances and protecting the ones he cares about.</p>
-                    <div class="hero-actions">
-                        <a class="btn btn-primary" href="manhwa site.html">Back to catalogue</a>
-                        <a class="btn btn-secondary" href="#description">Read synopsis</a>
+        <main id="main-content">
+            <section class="hero-card">
+                <div class="hero-grid">
+                    <img src="https://cdn.asurascans.com/asura-images/covers/starting-with-13-hidden-traits.a5e26c.webp" alt="Starting With 13 Hidden Traits cover">
+                    <div>
+                        <p class="eyebrow eyebrow--blue">Action · Fantasy · Romance</p>
+                        <h1 class="hero-title">Starting With 13 Hidden Traits</h1>
+                        <p class="hero-description">After being reincarnated into a new world, the protagonist discovers 13 hidden traits that grant tremendous power. He must master those abilities while building alliances and protecting the ones he cares about.</p>
+                        <div class="hero-actions">
+                            <a class="btn btn-primary" href="manhwa site.html">Back to catalogue</a>
+                            <a class="btn btn-secondary" href="#description">Read synopsis</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="info-grid">
-                <article class="info-card">
-                    <h2>Author</h2>
-                    <p><a href="https://asurascans.com/authors/starting-with-13-hidden-traits-26f76d6d">Starting With 13 Hidden Traits</a></p>
-                </article>
-                <article class="info-card">
-                    <h2>Genres</h2>
-                    <p>Action, Comedy, Fantasy, Martial Arts, Romance, School Life, Supernatural</p>
-                </article>
-                <article class="info-card">
-                    <h2>Rating</h2>
-                    <p>4.5 / 5</p>
-                </article>
-                <article class="info-card">
-                    <h2>Status</h2>
-                    <p>Ongoing</p>
-                </article>
-            </div>
-        </section>
+                <div class="info-grid">
+                    <article class="info-card">
+                        <h2>Author</h2>
+                        <p>Wolbaek</p>
+                    </article>
+                    <article class="info-card">
+                        <h2>Artist</h2>
+                        <p>Leejin</p>
+                    </article>
+                    <article class="info-card">
+                        <h2>Genres</h2>
+                        <p>Action, Comedy, Fantasy, Martial Arts, Romance, School Life, Supernatural</p>
+                    </article>
+                    <article class="info-card">
+                        <h2>Status</h2>
+                        <p>Ongoing</p>
+                    </article>
+                </div>
+            </section>
 
-        <section id="description" class="description-card">
-            <h2>Story Description</h2>
-            <p>After being reincarnated into a new world, the protagonist discovers that he has 13 hidden traits that give him incredible powers. With these traits, he embarks on a journey to become the strongest and protect those he cares about.</p>
-        </section>
+            <section id="description" class="description-card">
+                <h2>Story Description</h2>
+                <p>After being reincarnated into a new world, the protagonist discovers that he has 13 hidden traits that give him incredible powers. With these traits, he embarks on a journey to become the strongest and protect those he cares about.</p>
+            </section>
+        </main>
 
         <footer>
-            <p>© 2024 AsuraScan. All rights reserved.</p>
+            <p>© <span data-current-year></span> AsuraScan. All rights reserved.</p>
         </footer>
     </div>
 </body>
