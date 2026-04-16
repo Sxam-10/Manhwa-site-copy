@@ -1,2 +1,11 @@
 # Manhwa-site-copy
-Tried to copy manhwa site as second project i didnt created fully working page but added real page link at chapters 
+
+A small static clone-style project with:
+
+- A catalogue page (`manhwa site.html`) with live client-side search/filtering.
+- A detail page (`manhwa1.html`) for the featured series.
+- Shared styles (`styles.css`) and shared behavior (`app.js`) for easier maintenance.
+
+## Run locally
+
+Open `manhwa site.html` in your browser.
